@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/site.css" rel="stylesheet" />
+    @RenderSection("Styles",false)
+</head>
+<body>
+    @{ Html.RenderAction("Header", "Home");}
+    <div id="body">
+        <nav>
+            <ul id="myul">
+                @{ Html.RenderAction("Nav", "Home");}
+            </ul>
+        </nav>
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+    <footer>
+        ASP.NET MVC 5 - RBAC权限管理案例： RBAC Demo
+    </footer>
+</body>
+@RenderSection("Scripts",false)
+</html>

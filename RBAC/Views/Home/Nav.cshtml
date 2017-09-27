@@ -1,0 +1,13 @@
+﻿@using RBAC.Models;
+
+        <li><a class="active" href="#">首页</a></li>
+        @foreach (Module item in Model)
+        {
+            <li>@Html.ActionLink(item.Name,"Index",item.Controller)</li>
+        }
+        @*<li><a href="#">模块管理</a></li>
+        <li><a href="#">角色管理</a></li>
+        <li><a href="#">角色模块管理</a></li>
+        <li><a href="#">用户管理</a></li>
+        <li><a href="#">用户角色管理</a></li>*@
+

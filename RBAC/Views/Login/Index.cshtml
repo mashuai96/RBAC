@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/css/login.css" rel="stylesheet" />
+    <script src="~/script/jquery-1.8.0.js"></script>
+    <script>
+         $(function () {
+             $("#btn").click(function () {
+                 $.ajax({
+                     type: "post",
+                     url:"@Url.Action("Login","Login")",
+                     data: $("form").serialize(),
+                     success: function (data) {
+                         //alert(data)
+                         if (data.code == 200) {
+                             window.location='@Url.Action("Index","Home")'
+                         }
+                         else
+                         {
+                             alert("数据错误");
+                         }
+                     }
+                 })
+                 return false;
+        })
+    })
+    </script>
+</head>
+<body>
+    <div id="login">
+        <span class="form-title">登陆</span>
+        <form  method="post"  >
+            <div class="form-item">
+                <label>账号:</label>
+                <input type="text" name="username" />
+            </div>
+
+            <div class="form-item">
+                <label>密码:</label>
+                <input type="password" name="password" />
+            </div>
+            <input class="btn" id="btn"  type="button" value="登陆" />&nbsp;&nbsp;<a href="~/Login/Register"><input class="btn" type="button" value="注册" /></a>
+        </form>
+    </div>
+
+</body>
+</html>

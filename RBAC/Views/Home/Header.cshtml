@@ -1,0 +1,8 @@
+﻿<header>
+    <span class="logo">RBAC Demo</span>
+    <span class="right">
+        欢迎 @Model.Username [@Html.DropDownList("role",ViewBag.rlist as List<SelectListItem>)]
+        @Html.ActionLink("注销","Index","Login")
+    </span>
+</header>
+

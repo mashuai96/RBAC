@@ -1,0 +1,56 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    <link href="~/css/login.css" rel="stylesheet" />
+    <script src="~/script/jquery-1.8.0.js"></script>
+
+</head>
+<body>
+
+        <div id="login">
+            <span class="form-title">注册</span>
+            <form>
+                <div class="form-item">
+                    <label>账号:</label>
+                    <input type="text" name="username" />
+                </div>
+
+                <div class="form-item">
+                    <label>密码:</label>
+                    <input type="password" name="password" />
+                </div>
+                <input class="btn" id="btn" type="button" value="注册" />&nbsp;&nbsp;<a href="~/Login/Index"><input class="btn" type="button" value="登录" /></a>
+            </form>
+        </div>
+    <script>
+        $(function () {
+            $("#btn").click(function () {
+                 $.ajax({
+                     type: "post",
+                     url:"@Url.Action("AddData", "Login")",
+                     data: $("form").serialize(),
+                     success: function (data) {
+                         //alert(data)
+                         if (data.code == 200) {
+                             window.location='@Url.Action("Index","Login")'
+                         }
+                         //else
+                         //{
+                         //    alert("注册失败");
+                         //}
+                     }
+                 })
+                 //return false;
+        })
+    })
+    </script>
+</body>
+</html>
