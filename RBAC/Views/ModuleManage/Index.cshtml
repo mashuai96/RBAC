@@ -6,30 +6,29 @@
 @section Styles{
 <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
     }
-<h2>Index</h2>
-<table class="layui-table" lay-data="{width: 892, height:332, url:'@Url.Action("showData","ModuleManage")', page:true, id:'idTest'}" lay-filter="demo">
-    <thead>
-        <tr>
-            <th lay-data="{checkbox:true, fixed: true}"></th>
-            <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
-            <th lay-data="{field:'Name', width:80}">模块名称</th>
-            <th lay-data="{field:'Controller', width:80, sort: true}">控制器名称</th>
+    <h2><a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="add">添加</a></h2>
+    <table class="layui-table" lay-data="{width: 892, height:332, url:'@Url.Action("showData","ModuleManage")', page:true, id:'idTest'}" lay-filter="demo">
+        <thead>
+            <tr>
+                <th lay-data="{checkbox:true, fixed: true}"></th>
+                <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
+                <th lay-data="{field:'Name', width:80}">模块名称</th>
+                <th lay-data="{field:'Controller', width:80, sort: true}">控制器名称</th>
+                <th lay-data="{fixed: 'right', width:160, align:'center', toolbar: '#barDemo'}"></th>
+            </tr>
+        </thead>
+    </table>
 
-            <th lay-data="{fixed: 'right', width:160, align:'center', toolbar: '#barDemo'}"></th>
-        </tr>
-    </thead>
-</table>
-
-<script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
-    <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
-</script>
-@section Scripts{
-<script src="~/script/jquery-1.8.0.js"></script>
-@*<script src="~/Content/layui/layui.js"></script>*@
-<script src="~/Content/layui/layui.all.js"></script>
-       <script>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
+        <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+    </script>
+    @section Scripts{
+        <script src="~/script/jquery-3.2.1.js"></script>
+        <script src="~/Content/layui/layui.all.js"></script>
+        @*<script src="~/Content/layui/layui.js"></script>*@
+        <script>
            layui.use('table', function () {
                var table = layui.table;
 
@@ -37,15 +36,58 @@
                table.on('tool(demo)', function (obj) {
                    var data = obj.data;
                    if (obj.event === 'detail') {
-                       layer.msg('ID：' + data.id + ' 的查看操作');
+                       $.ajax({
+                           type: "post",
+                           url: "@Url.Action("details", "ModuleManage")",
+                           data: { "id": data.id },
+                           success: function (msg) {
+                               layer.open({
+                                   type: 1,
+                                   title: "查看模块信息",
+                                   content: msg,
+                                   area: ["500px", "300px"]
+                               })
+                           }
+                       })
+
+                       //layer.msg('ID：' + data.id + ' 的查看操作');
                    } else if (obj.event === 'del') {
                        layer.confirm('真的删除行么', function (index) {
                            obj.del();
+                               $.ajax({
+                           type: "post",
+                           url: "@Url.Action("delete", "ModuleManage")",
+                           data: { "id": data.id },
+                           success: function (msg) {
+                               if (msg == true)
+                               {
+                                   layer.msg("删除成功");
+                               }
+                               else
+                               {
+                                   layer.msg("删除失败");
+                               }
+                           }
+                       })
                            layer.close(index);
                        });
                    } else if (obj.event === 'edit') {
-                       layer.alert('编辑行：<br>' + JSON.stringify(data))
+                          $.ajax({
+                           type: "post",
+                           url: "@Url.Action("edit", "ModuleManage")",
+                           data: { "id": data.id },
+                           success: function (msg) {
+                               layer.open({
+                                   type: 1,
+                                   title: "编辑模块信息",
+                                   content: msg,
+                                   area: ["500px", "300px"]
+                               })
+                           }
+                       })
+                       //layer.alert('编辑行：<br>' + JSON.stringify(data))
                    }
+                  
                });
 
 
@@ -71,5 +113,5 @@
                    active[type] ? active[type].call(this) : '';
                });
            });
-       </script>
+        </script>
     }

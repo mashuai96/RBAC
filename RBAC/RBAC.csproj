@@ -205,6 +205,7 @@
     <Content Include="script\jquery-1.7.1.js" />
     <Content Include="script\jquery-1.8.0.js" />
     <Content Include="script\jquery-1.8.2.js" />
+    <Content Include="script\jquery-3.2.1.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -236,6 +237,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\ModuleManage\Index.cshtml" />
+    <Content Include="Views\ModuleManage\details.cshtml" />
+    <Content Include="Views\ModuleManage\edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

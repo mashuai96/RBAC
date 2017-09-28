@@ -1,0 +1,8 @@
+﻿<form method="post" action="@Url.Action("editData","ModuleManage")">
+    <table>
+        <tr><td>id</td><td><input type="text" value="@Model.id" name="id" readonly="" /></td></tr>
+        <tr><td>Name</td><td><input type="text" value="@Model.Name" name="Name" /></td></tr>
+        <tr><td>Controller</td><td><input type="text" value="@Model.Controller" name="Controller" /></td></tr>
+        <tr><td colspan="2"><input type="submit" value="确认修改" /></td></tr>
+    </table>
+</form>

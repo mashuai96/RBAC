@@ -23,5 +23,44 @@ namespace RBAC.Controllers
             var result = new { code = 0, msg = "", count = 500, data = mlist };//构建一个符合模版接口要求的数据
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        //查看
+        public ActionResult details()
+        {
+            int id = int.Parse(Request["id"]);
+            Module module = mr.Module.FirstOrDefault(x => x.id==id);
+            return View(module);
+        }
+        //编辑
+        public ActionResult edit()
+        {
+            int id = int.Parse(Request["id"]);
+            Module module = mr.Module.FirstOrDefault(x => x.id == id);
+            return View(module);
+        }
+        public ActionResult editData(int id,string Name,string Controller)
+        {
+            Module module = mr.Module.FirstOrDefault(x => x.id == id);
+            module.Name = Name;
+            module.Controller = Controller;
+            mr.SaveChanges();
+            return RedirectToAction("Index", "ModuleManage");
+
+        }
+        //删除
+        public ActionResult delete()
+        {
+            int id = int.Parse(Request["id"]);
+            Module module = mr.Module.FirstOrDefault(x => x.id == id);
+            if(module.Role.Count()>0)
+            {
+                return Json(false);
+            }
+            else
+            {
+                mr.Module.Remove(module);
+                mr.SaveChanges();
+                return Json(true);
+            }
+        }
     }
 }
