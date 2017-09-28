@@ -239,6 +239,8 @@
     <Content Include="Views\ModuleManage\Index.cshtml" />
     <Content Include="Views\ModuleManage\details.cshtml" />
     <Content Include="Views\ModuleManage\edit.cshtml" />
+    <Content Include="Views\ModuleManage\addtest.cshtml" />
+    <Content Include="Views\ModuleManage\add.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

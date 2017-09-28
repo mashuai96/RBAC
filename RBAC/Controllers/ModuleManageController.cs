@@ -15,6 +15,7 @@ namespace RBAC.Controllers
         {
             return View();
         }
+        //显示
         public ActionResult showData()
         {
             //只获取当前实体
@@ -61,6 +62,20 @@ namespace RBAC.Controllers
                 mr.SaveChanges();
                 return Json(true);
             }
+        }
+        //添加
+        public ActionResult add()
+        {
+            return View();
+        }
+        public ActionResult addData(string Name,string Controller)
+        {
+            Module module = new Module();
+            module.Name = Name;
+            module.Controller = Controller;
+            mr.Module.Add(module);
+            mr.SaveChanges();
+            return RedirectToAction("Index", "ModuleManage");
         }
     }
 }
